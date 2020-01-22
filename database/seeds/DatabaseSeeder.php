@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
                 'email' => $faker->freeEmail,
                 'phone' => $faker->e164PhoneNumber,
                 'address' => $faker->address,
-                'password' => '12345678',
+                'password' => DB::raw('md5("admin")'),
+                // 'api_token' => DB::raw('md5("admin")'),
+                'api_token' => base64_encode(Str::random(40)),
                 'created_at' => Carbon::now(),
             ]);
         }

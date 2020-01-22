@@ -14,4 +14,11 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/testconnection', 'Controller@testconnection');
+$router->post('/HeaderContent', 'ExampleController@HeaderContent');
+$router->post('/model_testing', 'ExampleController@model_testing');
+
+$router->post('/user', 'MainController@user');
+
+$router->post('/category_products', 'CategoryController@category_products');
+
+$router->post('/product_category', 'ProductController@product_category');
