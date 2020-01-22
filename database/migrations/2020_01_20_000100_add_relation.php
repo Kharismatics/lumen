@@ -14,10 +14,9 @@ class AddRelation extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
-        Schema::table('prices', function (Blueprint $table) {
+        Schema::table('stocks', function (Blueprint $table) {
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
