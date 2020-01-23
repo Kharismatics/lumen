@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-use App\Product;
+use App\Transaction;
 
-class ProductController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -28,37 +28,36 @@ class ProductController extends Controller
         $this->response = 'failed';           
     }
 
-    public function product_category()
+    public function user_transactions()
     {
-        return Product::with('category')->get();        
+        // return User::all();
+        return Transaction::with('transactions')->get();        
     }
-    public function product_stocks()
+    public function best_product_transaction()
     {
-        return Product::with('stocks')->get();        
-    }
-    public function product_transactions()
-    {
-        return Product::with('transactions')->get();        
+        return Transaction::all()->groupBy('id')->count();        
     }
     // Resource Controller
     public function index()
     {
-        return Product::all();
+        return Transaction::all();
     }
     public function show(Request $request)
     {
-        return Product::find($request->id);
+        return Transaction::find($request->id);
     }
     public function store(Request $request)
     {
-        $data = new Product;
+        $data = new Transaction;
 
-        $data->category_id = $request->category_id;
-        $data->unique_code = $request->unique_code;
-        $data->name = $request->name;
-        $data->base_price = $request->base_price;
-        $data->price = $request->price;
+        $data->product_id = $request->product_id;
+        $data->user_id = $request->user_id;
+        $data->transaction_date = $request->transaction_date;
+        $data->discount = $request->discount;
+        $data->shipping_cost = $request->shipping_cost;
         $data->description = $request->description;
+        $data->remark = $request->remark;
+        $data->transaction_status = $request->transaction_status;
         $data = $data->save();
         if ($data) {
             $this->response = 'success';
@@ -67,14 +66,16 @@ class ProductController extends Controller
     }
     public function update(Request $request)
     {
-        $data = Product::find($request->id);
+        $data = Transaction::find($request->id);
         if ($data) {
-            $data->category_id = $request->category_id;
-            $data->unique_code = $request->unique_code;
-            $data->name = $request->name;
-            $data->base_price = $request->base_price;
-            $data->price = $request->price;
+            $data->product_id = $request->product_id;
+            $data->user_id = $request->user_id;
+            $data->transaction_date = $request->transaction_date;
+            $data->discount = $request->discount;
+            $data->shipping_cost = $request->shipping_cost;
             $data->description = $request->description;
+            $data->remark = $request->remark;
+            $data->transaction_status = $request->transaction_status;
             $data = $data->save() ;
             $this->response = 'success';
         } 
@@ -82,7 +83,7 @@ class ProductController extends Controller
     }
     public function delete(Request $request)
     {
-        $data = Product::find($request->id);
+        $data = Transaction::find($request->id);
         if ($data) {
             $data = $data->delete();
             $this->response = 'success';

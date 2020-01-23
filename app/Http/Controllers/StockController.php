@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-use App\Category;
+use App\Stock;
 
-class CategoryController extends Controller
+class StockController extends Controller
 {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-
-     private 
+    private 
             $response ;
 
     public function __construct(Request $request)
@@ -29,30 +28,30 @@ class CategoryController extends Controller
         $this->response = 'failed';           
     }
 
-    public function category_products()
+    public function stock_product()
     {
-        // return Category::all();
-        // $comments = Category::find(1)->products;
+        // return Stock::all();
+        // $comments = Stock::find(1)->products;
         // foreach ($comments as $comment) {
         //     echo $comment;
         // }
-        return Category::with('products')->get();     
+        return Stock::with('product')->get();     
     }
     // Resource Controller
     public function index()
     {
-        return Category::all();
+        return Stock::all();
     }
     public function show(Request $request)
     {
-        return Category::find($request->id);
+        return Stock::find($request->id);
     }
     public function store(Request $request)
     {
-        $data = new Category;
+        $data = new Stock;
 
-        $data->name = $request->name;
-        $data->description = $request->description;
+        $data->product_id = $request->product_id;
+        $data->quantity = $request->quantity;
         $data = $data->save();
         if ($data) {
             $this->response = 'success';
@@ -61,10 +60,10 @@ class CategoryController extends Controller
     }
     public function update(Request $request)
     {
-        $data = Category::find($request->id);
+        $data = Stock::find($request->id);
         if ($data) {
-            $data->name = $request->name;
-            $data->description = $request->description;
+            $data->product_id = $request->product_id;
+            $data->quantity = $request->quantity;
             $data = $data->save() ;
             $this->response = 'success';
         } 
@@ -72,7 +71,7 @@ class CategoryController extends Controller
     }
     public function delete(Request $request)
     {
-        $data = Category::find($request->id);
+        $data = Stock::find($request->id);
         if ($data) {
             $data = $data->delete();
             $this->response = 'success';

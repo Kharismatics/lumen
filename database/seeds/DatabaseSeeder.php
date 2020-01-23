@@ -31,10 +31,12 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->insert([
             [
                 'name' => 'bag',
+                'description' => 'bag',
                 'created_at' => Carbon::now(),
             ],
             [
                 'name' => 'wallet',
+                'description' => 'wallet',
                 'created_at' => Carbon::now(),
             ],
         ]);
