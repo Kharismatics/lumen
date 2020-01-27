@@ -27,16 +27,6 @@ class TransactionController extends Controller
 
         $this->response = 'failed';           
     }
-
-    public function user_transactions()
-    {
-        // return User::all();
-        return Transaction::with('transactions')->get();        
-    }
-    public function best_product_transaction()
-    {
-        return Transaction::all()->groupBy('id')->count();        
-    }
     // Resource Controller
     public function index()
     {

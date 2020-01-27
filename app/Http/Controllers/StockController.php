@@ -27,16 +27,6 @@ class StockController extends Controller
 
         $this->response = 'failed';           
     }
-
-    public function stock_product()
-    {
-        // return Stock::all();
-        // $comments = Stock::find(1)->products;
-        // foreach ($comments as $comment) {
-        //     echo $comment;
-        // }
-        return Stock::with('product')->get();     
-    }
     // Resource Controller
     public function index()
     {

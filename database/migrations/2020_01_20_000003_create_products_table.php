@@ -21,6 +21,8 @@ class CreateProductsTable extends Migration
             $table->integer('base_price');
             $table->integer('price');
             $table->mediumText('description');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by')->nullable($value = true);
             $table->timestamps();
             $table->softDeletes();
         });

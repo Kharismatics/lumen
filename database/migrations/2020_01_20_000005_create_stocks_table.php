@@ -17,6 +17,8 @@ class CreateStocksTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->integer('quantity');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by')->nullable($value = true);
             $table->timestamps();
             $table->softDeletes();
         });

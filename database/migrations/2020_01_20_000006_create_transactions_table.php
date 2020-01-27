@@ -23,6 +23,8 @@ class CreateTransactionsTable extends Migration
             $table->mediumText('description');
             $table->mediumText('remark');
             $table->integer('transaction_status');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by')->nullable($value = true);
             $table->timestamps();
             $table->softDeletes();
         });

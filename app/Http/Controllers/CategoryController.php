@@ -28,16 +28,6 @@ class CategoryController extends Controller
 
         $this->response = 'failed';           
     }
-
-    public function category_products()
-    {
-        // return Category::all();
-        // $comments = Category::find(1)->products;
-        // foreach ($comments as $comment) {
-        //     echo $comment;
-        // }
-        return Category::with('products')->get();     
-    }
     // Resource Controller
     public function index()
     {

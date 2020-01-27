@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
                 'password' => DB::raw('md5("admin")'),
                 // 'api_token' => DB::raw('md5("admin")'),
                 'api_token' => base64_encode(Str::random(40)),
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now(),                
             ]);
         }
 
@@ -33,11 +33,13 @@ class DatabaseSeeder extends Seeder
                 'name' => 'bag',
                 'description' => 'bag',
                 'created_at' => Carbon::now(),
+                'created_by' => 1,
             ],
             [
                 'name' => 'wallet',
                 'description' => 'wallet',
                 'created_at' => Carbon::now(),
+                'created_by' => 1,
             ],
         ]);
         
@@ -51,6 +53,7 @@ class DatabaseSeeder extends Seeder
                     'price' => 150000,
                     'description' => 'tes',
                     'created_at' => Carbon::now(),
+                    'created_by' => 1,
                 ]
             );
         }
@@ -60,6 +63,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 1,
                 'quantity' => 20,
                 'created_at' => Carbon::now(),
+                'created_by' => 1,
             ]
         );
 
@@ -76,6 +80,7 @@ class DatabaseSeeder extends Seeder
                     'remark' => 1,
                     'transaction_status' => $faker->numberBetween($min = 1, $max = 3),
                     'created_at' => Carbon::now(),
+                    'created_by' => 1,
                 ]
             );
         }

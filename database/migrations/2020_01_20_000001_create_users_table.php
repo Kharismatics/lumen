@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('api_token');
             $table->string('phone');
             $table->mediumText('address');
+            $table->bigInteger('created_by')->nullable($value = true);
+            $table->bigInteger('updated_by')->nullable($value = true);
             $table->timestamps();
             $table->softDeletes();
         });

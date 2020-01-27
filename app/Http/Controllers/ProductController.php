@@ -27,19 +27,6 @@ class ProductController extends Controller
 
         $this->response = 'failed';           
     }
-
-    public function product_category()
-    {
-        return Product::with('category')->get();        
-    }
-    public function product_stocks()
-    {
-        return Product::with('stocks')->get();        
-    }
-    public function product_transactions()
-    {
-        return Product::with('transactions')->get();        
-    }
     // Resource Controller
     public function index()
     {
