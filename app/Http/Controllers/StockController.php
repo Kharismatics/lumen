@@ -42,6 +42,7 @@ class StockController extends Controller
 
         $data->product_id = $request->product_id;
         $data->quantity = $request->quantity;
+        $data->in_out = $request->in_out;
         $data = $data->save();
         if ($data) {
             $this->response = 'success';
@@ -54,6 +55,7 @@ class StockController extends Controller
         if ($data) {
             $data->product_id = $request->product_id;
             $data->quantity = $request->quantity;
+            $data->in_out = $request->in_out;
             $data = $data->save() ;
             $this->response = 'success';
         } 

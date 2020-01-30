@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
                     'category_id' => $faker->numberBetween($min = 1, $max = 2),
                     'unique_code' => $faker->shuffle('123456abc'),
                     'base_price' => $faker->numberBetween($min = 50000, $max =100000),
-                    'price' => 150000,
+                    'price' => $faker->numberBetween($min = 150000, $max =200000),
                     'description' => 'tes',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
@@ -58,14 +58,17 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        DB::table('stocks')->insert(
-            [
-                'product_id' => 1,
-                'quantity' => 20,
-                'created_at' => Carbon::now(),
-                'created_by' => 1,
-            ]
-        );
+        foreach (range(1, 50) as $index) {
+            DB::table('stocks')->insert(
+                [
+                    'product_id' => $faker->numberBetween($min = 1, $max = 10),
+                    'quantity' => $faker->numberBetween($min = 1, $max = 5),
+                    'in_out' => $faker->numberBetween($min = 1, $max = 2),
+                    'created_at' => "".$faker->numberBetween($min = 2018, $max = 2018)."-".$faker->month($max = 'now')."-".$faker->numberBetween($min = 1, $max = 28),
+                    'created_by' => 1,
+                ]
+            );
+        }
 
         foreach (range(1, 250) as $index) {
             DB::table('transactions')->insert(
@@ -74,7 +77,8 @@ class DatabaseSeeder extends Seeder
                     'user_id' => $faker->numberBetween($min = 1, $max = 10),
                     // 'transaction_date' => "".$faker->numberBetween($min = 2018, $max = 2020)."-".$faker->month($max = 'now')."-01",
                     'transaction_date' => "".$faker->numberBetween($min = 2018, $max = 2020)."-".$faker->month($max = 'now')."-".$faker->numberBetween($min = 1, $max = 28),
-                    'discount' => 1,
+                    'quantity' => $faker->numberBetween($min = 1, $max = 3),
+                    'discount' => $faker->numberBetween($min = 2000, $max = 3000),
                     'shipping_cost' => $faker->numberBetween($min = 5000, $max = 30000),
                     'description' => 1,
                     'remark' => 1,

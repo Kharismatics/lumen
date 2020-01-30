@@ -43,6 +43,7 @@ class TransactionController extends Controller
         $data->product_id = $request->product_id;
         $data->user_id = $request->user_id;
         $data->transaction_date = $request->transaction_date;
+        $data->quantity = $request->quantity;
         $data->discount = $request->discount;
         $data->shipping_cost = $request->shipping_cost;
         $data->description = $request->description;
@@ -61,6 +62,7 @@ class TransactionController extends Controller
             $data->product_id = $request->product_id;
             $data->user_id = $request->user_id;
             $data->transaction_date = $request->transaction_date;
+            $data->quantity = $request->quantity;
             $data->discount = $request->discount;
             $data->shipping_cost = $request->shipping_cost;
             $data->description = $request->description;

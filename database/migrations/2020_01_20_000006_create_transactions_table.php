@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->date('transaction_date');
+            $table->integer('quantity');
             $table->integer('discount');
             $table->integer('shipping_cost');
             $table->mediumText('description');
