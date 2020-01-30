@@ -14,6 +14,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+$router->get('/app', function () use ($router) {
+    return view('app');
+});
 
 $router->post('/main_user', 'MainController@main_user');
 $router->post('/upcoming_orders', 'MainController@upcoming_orders');
