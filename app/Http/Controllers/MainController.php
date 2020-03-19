@@ -119,9 +119,26 @@ class MainController extends Controller
                 ->get();
         return $data;
     }
+    public function total_orders()
+    {
+        $data = DB::table('transactions')
+                ->select( DB::raw('count(transactions.id) as aggregate') )
+                ->where('transactions.created_by', Auth::user()->id)
+                // ->where('transactions.transaction_status', 3)
+                ->get();
+        return $data;
+    }
     public function total_products()
     {
         $data = DB::table('products')
+                ->select( DB::raw('count(id) as aggregate') )
+                ->where('created_by', Auth::user()->id)
+                ->get();
+        return $data;
+    }
+    public function total_categories()
+    {
+        $data = DB::table('categories')
                 ->select( DB::raw('count(id) as aggregate') )
                 ->where('created_by', Auth::user()->id)
                 ->get();
@@ -135,7 +152,15 @@ class MainController extends Controller
                 ->get();
         return $data;
     }
-    public function best_product()
+    public function total_stocks()
+    {
+        $data = DB::table('stocks')
+                ->select( DB::raw('SUM(IF(in_out=1,quantity,-quantity)) as aggregate') )
+                ->where('created_by', Auth::user()->id)
+                ->get();
+        return $data;
+    }
+    public function best_product_chart()
     {
         $data = DB::table('transactions')
                 ->join('products', 'products.id', '=', 'transactions.product_id')
@@ -147,7 +172,7 @@ class MainController extends Controller
                 ->get();
         return Helpers::Chart_js($data);
     }
-    public function best_customer()
+    public function best_customer_chart()
     {
         $data = DB::table('transactions')
                 ->join('users', 'users.id', '=', 'transactions.user_id')
@@ -159,7 +184,7 @@ class MainController extends Controller
                 ->get();
         return Helpers::Chart_js($data);
     }
-    public function sales_chart_byprice()
+    public function sales_byprice_chart()
     {
         
         $data = DB::table('transactions')
@@ -172,7 +197,7 @@ class MainController extends Controller
         ->get();
         return Helpers::Chart_js($data);
     }
-    public function sales_chart_byquantity()
+    public function sales_byquantity_chart()
     {
         
         $data = DB::table('transactions')
@@ -185,7 +210,7 @@ class MainController extends Controller
         ->get();
         return Helpers::Chart_js($data);
     }
-    public function in_out_stocks()
+    public function in_out_stocks_chart()
     {
         $label = DB::select("SELECT DATE_FORMAT(dates,'%Y %b') AS dates , 0 AS `in`, 0 AS `out` FROM ( SELECT @date := DATE_ADD(@date, INTERVAL 1 DAY) AS dates FROM mysql.help_relation , ( SELECT @date:= DATE_SUB('2018-01-01', INTERVAL 1 DAY)) d WHERE @date BETWEEN @date AND DATE_SUB('2018-12-31', INTERVAL 1 DAY ) ) a GROUP BY YEAR(a.dates), MONTH(a.dates) ORDER BY YEAR(a.dates), MONTH(a.dates)");
         $data = DB::select('SELECT 

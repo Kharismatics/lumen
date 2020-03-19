@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
                 'password' => DB::raw('md5("admin")'),
                 // 'api_token' => DB::raw('md5("admin")'),
                 'api_token' => base64_encode(Str::random(40)),
-                'created_at' => Carbon::now(),                
+                'created_at' => Carbon::now(),  
+                'created_by' => 1,              
             ]);
         }
 

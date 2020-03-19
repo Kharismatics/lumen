@@ -16,6 +16,10 @@ class CategoryController extends Controller
      */
 
      private 
+            $validate = [
+                'name' => 'required|name|unique:categories,name,NULL,id,deleted_at,NULL',
+                'description' => 'required',
+            ],
             $response ;
 
     public function __construct(Request $request)
@@ -39,6 +43,7 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
+        $this->validate($request, $this->validate);
         $data = new Category;
 
         $data->name = $request->name;
@@ -51,6 +56,7 @@ class CategoryController extends Controller
     }
     public function update(Request $request)
     {
+        $this->validate($request, $this->validate);
         $data = Category::find($request->id);
         if ($data) {
             $data->name = $request->name;

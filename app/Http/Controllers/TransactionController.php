@@ -15,6 +15,14 @@ class TransactionController extends Controller
      * @return void
      */
     private 
+            $validate = [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+                'password' => 'required',
+                'api_token' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+            ],
             $response ;
 
     public function __construct(Request $request)

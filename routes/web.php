@@ -14,38 +14,35 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/app', function () use ($router) {
-    return view('app');
-});
-
+// View =========================================================================
+$router->get('/dashboard', 'ViewController@dashboard');
+$router->get('/users', 'ViewController@users');
+$router->get('/categories', 'ViewController@categories');
+$router->post('/form', 'ViewController@form');
+// End View =====================================================================
+// Data Factory =================================================================
 $router->post('/main_user', 'MainController@main_user');
 $router->post('/upcoming_orders', 'MainController@upcoming_orders');
 $router->post('/inprogress_orders', 'MainController@inprogress_orders');
 $router->post('/completed_orders', 'MainController@completed_orders');
+$router->post('/total_orders', 'MainController@total_orders');
 $router->post('/total_products', 'MainController@total_products');
+$router->post('/total_categories', 'MainController@total_categories');
 $router->post('/total_customers', 'MainController@total_customers');
-$router->post('/best_product', 'MainController@best_product');
-$router->post('/best_customer', 'MainController@best_customer');
-$router->post('/sales_chart_byprice', 'MainController@sales_chart_byprice');
-$router->post('/sales_chart_byquantity', 'MainController@sales_chart_byquantity');
-$router->post('/in_out_stocks', 'MainController@in_out_stocks');
-// $router->post('/HeaderContent', 'MainController@HeaderContent');
-// $router->post('/model_testing', 'MainController@model_testing');
-// $router->post('/user_transactions', 'MainController@user_transactions');
-// $router->post('/transaction_product', 'MainController@transaction_product');
-// $router->post('/stock_product', 'MainController@stock_product');
-// $router->post('/category_products', 'MainController@category_products');
-// $router->post('/product_category', 'MainController@product_category');
-// $router->post('/product_stocks', 'MainController@product_stocks');
-// $router->post('/product_transactions', 'MainController@product_transactions');
-
-// CRUD ========================================================================
+$router->post('/total_stocks', 'MainController@total_stocks');
+$router->post('/best_product_chart', 'MainController@best_product_chart');
+$router->post('/best_customer_chart', 'MainController@best_customer_chart');
+$router->post('/sales_byprice_chart', 'MainController@sales_byprice_chart');
+$router->post('/sales_byquantity_chart', 'MainController@sales_byquantity_chart');
+$router->post('/in_out_stocks_chart', 'MainController@in_out_stocks_chart');
+// End Data Factory =============================================================
+// CRUD =========================================================================
 // User
 $router->post('/users', 'UserController@index');
 $router->post('/user', 'UserController@show');
-$router->post('/user_store', 'UserController@store');
-$router->post('/user_update', 'UserController@update');
-$router->post('/user_delete', 'UserController@delete');
+$router->post('/users_store', 'UserController@store');
+$router->post('/users_update', 'UserController@update');
+$router->post('/users_delete', 'UserController@delete');
 // End User
 // Category
 $router->post('/categories', 'CategoryController@index');
@@ -75,4 +72,4 @@ $router->post('/transaction_store', 'TransactionController@store');
 $router->post('/transaction_update', 'TransactionController@update');
 $router->post('/transaction_delete', 'TransactionController@delete');
 // End Transaction
-// End CRUD ======================================================================
+// End CRUD =====================================================================

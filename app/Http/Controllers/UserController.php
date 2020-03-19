@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
+use Auth;
 use App\User;
 use Illuminate\Support\Str;
 
@@ -16,6 +16,14 @@ class UserController extends Controller
      * @return void
      */
     private 
+            $validate = [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+                'password' => 'required',
+                'api_token' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+            ],
             $response ;
 
     public function __construct(Request $request)
@@ -31,7 +39,8 @@ class UserController extends Controller
     // Resource Controller
     public function index()
     {
-        return User::all();
+        // return User::all();
+        return User::where('id', '!=', Auth::user()->id)->get();
     }
     public function show(Request $request)
     {
@@ -39,8 +48,8 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+        $this->validate($request, $this->validate);
         $data = new User;
-
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = $request->password;
@@ -56,6 +65,7 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+        $this->validate($request, $this->validate);
         $data = User::find($request->id);
         if ($data) {
             $data->name = $request->name;
