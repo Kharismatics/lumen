@@ -163,7 +163,7 @@
 
                             <div class="chart">
                                 <!-- Sales Chart Canvas -->
-                                <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                                <canvas id="budget_x_sales" height="180" style="height: 180px;"></canvas>
                             </div>
                             <!-- /.chart-responsive -->
                         </div>

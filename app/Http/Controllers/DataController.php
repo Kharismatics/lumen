@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Auth;
 use DB;
-use Helpers;
+use MyFunctions;
 
 // use App\User;
 // use App\Category;
@@ -185,6 +185,21 @@ class DataController extends Controller
         ->get();
         return Helpers::Chart_js($data);
     }
+    public function budget_x_sales()
+    {
+        $label = DB::select("SELECT DATE_FORMAT(dates,'%Y %b') AS dates , 0 AS result FROM ( SELECT @date := DATE_ADD(@date, INTERVAL 1 DAY) AS dates FROM mysql.help_relation , ( SELECT @date:= DATE_SUB('2018-01-01', INTERVAL 1 DAY)) d WHERE @date BETWEEN @date AND DATE_SUB('2018-12-31', INTERVAL 1 DAY ) ) a GROUP BY YEAR(a.dates), MONTH(a.dates) ORDER BY YEAR(a.dates), MONTH(a.dates)");
+        $data = DB::select('SELECT 
+                            DATE_FORMAT(a.created_at,"%Y %b") dates,
+                            IF(a.in_out=1,"IN","OUT") `name`,
+                            IF(a.in_out=1,SUM(b.base_price*a.quantity),SUM(b.price*a.quantity)) result
+                            FROM `stocks` a
+                            JOIN products b ON a.product_id = b.id  
+                            WHERE a.created_at BETWEEN "2018-01-01" AND "2018-04-31"
+                            GROUP BY YEAR(a.created_at), MONTH(a.created_at),a.in_out ORDER BY YEAR(a.created_at), MONTH(a.created_at),a.in_out');
+        if ($data) {
+            return MyFunctions::Chart_js_multiaxis_bymonth($label,$data); 
+        }
+    }
     public function in_out_stocks_chart()
     {
         $label = DB::select("SELECT DATE_FORMAT(dates,'%Y %b') AS dates , 0 AS `in`, 0 AS `out` FROM ( SELECT @date := DATE_ADD(@date, INTERVAL 1 DAY) AS dates FROM mysql.help_relation , ( SELECT @date:= DATE_SUB('2018-01-01', INTERVAL 1 DAY)) d WHERE @date BETWEEN @date AND DATE_SUB('2018-12-31', INTERVAL 1 DAY ) ) a GROUP BY YEAR(a.dates), MONTH(a.dates) ORDER BY YEAR(a.dates), MONTH(a.dates)");
@@ -197,7 +212,7 @@ class DataController extends Controller
                             JOIN products b on a.product_id = b.id  
                             GROUP BY YEAR(a.created_at), MONTH(a.created_at),a.product_id ORDER BY YEAR(a.created_at), MONTH(a.created_at),a.product_id');
         if ($data) {
-            return Helpers::Chart_js_multiaxis_bymonth($label,$data); 
+            return Helpers::Chart_js_multiaxis_bymonth_custom($label,$data); 
         }
     }
 }

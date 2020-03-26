@@ -37,6 +37,7 @@ $router->post('/best_customer_chart', 'DataController@best_customer_chart');
 $router->post('/sales_byprice_chart', 'DataController@sales_byprice_chart');
 $router->post('/sales_byquantity_chart', 'DataController@sales_byquantity_chart');
 $router->post('/in_out_stocks_chart', 'DataController@in_out_stocks_chart');
+$router->post('/budget_x_sales', 'DataController@budget_x_sales');
 // End Data Factory =============================================================
 // CRUD =========================================================================
 // User

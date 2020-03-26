@@ -1,6 +1,6 @@
 <?php
 
-class Helpers
+class MyFunctions
 {
     public static function hello_world()
     {
@@ -56,6 +56,32 @@ class Helpers
             ),JSON_NUMERIC_CHECK);   
     }   
     public static function Chart_js_multiaxis_bymonth($label,$data)
+    {
+        $array = array_reduce($data, function ($a, $b) {$a[$b->name][] = $b;return $a;});
+            foreach ( $array as $key => $value ) {
+                foreach ( $value as $object ) 
+                    $datareduce[$key][]= array(
+                        'dates'=>$object->dates,
+                        'result'=>$object->result
+                );
+            }
+
+            $validlabel = json_decode(json_encode($label), true);
+
+            $datafinal = array();
+            foreach ($datareduce as $key => $value) {
+                foreach ($validlabel as $bkey => $bvalue) {
+                    if (($dkey = array_search($bvalue['dates'], array_column($value, 'dates'))) !== false) {
+                        $datafinal[$key][$bkey] = $value[$dkey];
+                    }
+                    else {
+                        $datafinal[$key][$bkey] = $bvalue;
+                    }
+                }
+            }
+            return json_encode($datafinal,JSON_NUMERIC_CHECK);
+    }
+    public static function Chart_js_multiaxis_bymonth_custom($label,$data)
     {
         $array = array_reduce($data, function ($a, $b) {$a[$b->name][] = $b;return $a;});
             foreach ( $array as $key => $value ) {
