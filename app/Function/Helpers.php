@@ -46,14 +46,14 @@ class Helpers
             $label[] = $value->name;
             $aggregate[] = $value->aggregate;
         }
-        return array(
+        return json_encode(array(
             'data'=>array(
                 "labels"=>$label,
                 "datasets"=>array(
                         array("data"=>$aggregate),
                     )
                 ),
-            );   
+            ),JSON_NUMERIC_CHECK);   
     }   
     public static function Chart_js_multiaxis_bymonth($label,$data)
     {
@@ -80,6 +80,6 @@ class Helpers
                     }
                 }
             }
-            return $datafinal;
+            return json_encode($datafinal,JSON_NUMERIC_CHECK);
     }
 }
