@@ -23,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
         $uri_base = URL::to('/');;
         $uri_tail = end($uri_parts);
         view()->share('script_src', $uri_base."/dist/js/pages/".$uri_tail.".js");
+        view()->share('routes', $uri_tail);
     }
 }

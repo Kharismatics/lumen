@@ -42,4 +42,20 @@ class ViewController extends Controller
     {
         return view('users');
     }
+    public function categories()
+    {
+        return view('categories');
+    }
+    public function stocks()
+    {
+        return view('stocks');
+    }
+    public function products()
+    {
+        return view('products');
+    }
+    public function transactions()
+    {
+        return view('transactions');
+    }
 }

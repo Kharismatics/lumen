@@ -339,6 +339,7 @@
   
   <script>   
       var API_KEY = 'cXZ1RlNaVkVCN1VJdlI4V0VtZzlYRUtJb2hUR0V2eHRtR25wVkNrYw==';
+      var ROUTES = "{{  $routes }}";
       var model = '';
   </script>
 </body>

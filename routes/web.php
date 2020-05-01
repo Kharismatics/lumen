@@ -16,9 +16,12 @@ $router->get('/', function () use ($router) {
 });
 // View =========================================================================
 $router->get('/dashboard', 'ViewController@dashboard');
-$router->get('/users', 'ViewController@users');
-$router->get('/categories', 'ViewController@categories');
 $router->post('/form', 'ViewController@form');
+$router->get('/users', 'ViewController@users');
+$router->get('/products', 'ViewController@products');
+$router->get('/categories', 'ViewController@categories');
+$router->get('/stocks', 'ViewController@stocks');
+$router->get('/transactions', 'ViewController@transactions');
 // End View =====================================================================
 // Data Core =================================================================
 $router->post('/main_user', 'MainController@main_user');
