@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -16,12 +17,11 @@ class ProductController extends Controller
      */
     private 
             $validate = [
+                'unique_code' => 'required|unique:products,unique_code',
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
-                'password' => 'required',
-                'api_token' => 'required',
-                'phone' => 'required',
-                'address' => 'required',
+                'base_price' => 'required',
+                'price' => 'required',
+                'description' => 'required',
             ],
             $response ;
 
@@ -38,14 +38,22 @@ class ProductController extends Controller
     // Resource Controller
     public function index()
     {
-        return Product::all();
+        // return Product::all();
+        return Product::with('category')->get(); 
     }
     public function show(Request $request)
     {
         return Product::find($request->id);
     }
+    public function edit(Request $request)
+    {
+        $product = Product::find($request->id);
+        $categories = Category::orderBy('name', 'DESC')->get();
+        return view('products.edit', compact('product', 'categories'));
+    }
     public function store(Request $request)
     {
+        $this->validate($request, $this->validate);
         $data = new Product;
 
         $data->category_id = $request->category_id;
@@ -62,6 +70,9 @@ class ProductController extends Controller
     }
     public function update(Request $request)
     {
+        $this->validate['unique_code'] = ['unique_code' => 'unique:products,unique_code,'.$request->id];        
+        $this->validate($request, $this->validate);
+
         $data = Product::find($request->id);
         if ($data) {
             $data->category_id = $request->category_id;

@@ -9,6 +9,17 @@ class Product extends Model
 {
     use SoftDeletes;
     
+    protected $hidden = [
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ]; 
+    protected $fillable = [
+        'id',
+    ];
+    
     public function category()
     {
         return $this->belongsTo('App\Category');
@@ -20,6 +31,5 @@ class Product extends Model
     public function transactions()
     {
         return $this->hasMany('App\Transaction');
-    }
-    
+    }   
 }

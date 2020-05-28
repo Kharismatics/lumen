@@ -15,10 +15,14 @@
                     </div>
                     <div class="modal-body">
                         <form role="form" id="form">
+                            <input type="hidden" class="form-control" id="id" value="" placeholder="Enter id">
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="id" value="" placeholder="Enter id">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" value="name" placeholder="Enter name">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" value="description" placeholder="Enter name">
                             </div>
                         </form>
                     </div>
@@ -33,7 +37,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"><button  onclick="GetForm('','add','users')" type="button" class="btn btn-success btn-lg">Add <i class="fa fa-plus"></i></button></h3>
+                    <h3 class="card-title"><button  onclick="GetForm('','add','category')" type="button" class="btn btn-success btn-lg">Add <i class="fa fa-plus"></i></button></h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">                        
@@ -41,11 +45,17 @@
                             <thead>
                                 <tr>
                                     <th>ID#</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>ID#</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>					
                         </table>

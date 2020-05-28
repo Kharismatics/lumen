@@ -41,6 +41,8 @@ $router->post('/sales_byprice_chart', 'DataController@sales_byprice_chart');
 $router->post('/sales_byquantity_chart', 'DataController@sales_byquantity_chart');
 $router->post('/in_out_stocks_chart', 'DataController@in_out_stocks_chart');
 $router->post('/budget_x_sales', 'DataController@budget_x_sales');
+
+$router->post('/category_products', 'DataController@category_products');
 // End Data Factory =============================================================
 // CRUD =========================================================================
 // User
@@ -59,7 +61,7 @@ $router->post('/category_delete', 'CategoryController@delete');
 // End Category
 // Product
 $router->post('/products', 'ProductController@index');
-$router->post('/product', 'ProductController@show');
+$router->post('/product', 'ProductController@edit');
 $router->post('/product_store', 'ProductController@store');
 $router->post('/product_update', 'ProductController@update');
 $router->post('/product_delete', 'ProductController@delete');
@@ -79,3 +81,11 @@ $router->post('/transaction_update', 'TransactionController@update');
 $router->post('/transaction_delete', 'TransactionController@delete');
 // End Transaction
 // End CRUD =====================================================================
+// php artisan make:controller PhotoController --resource --model=Photo
+// --
+// Route::resource('photos', 'PhotoController');
+// --
+// Route::resources([
+//     'photos' => 'PhotoController',
+//     'posts' => 'PostController'
+// ]);

@@ -19,7 +19,20 @@ $(function () {
             }
         },
         columns: [
-            { data: "id" },
+            { data: "unique_code" },
+            { data: "name" },
+            { data: "category.name" },
+            { data: "base_price" },
+            { data: "price" },
+            { data: "description" },
+            {
+                data: null,
+                render: function (data, type, row, val, meta) {
+                    var edit_btn = '<button type="button" onclick="GetForm(' + row.id + ',\'edit\',\'product\')" class="btn btn-warning btn-flat"><i class="fas fa-edit"></i></button>';
+                    var delete_btn = '<button type="button" onclick="DeleteModel(' + row.id + ',\'product\')" class="btn btn-danger btn-flat"><i class="fas fa-trash"></i></button>';
+                    return '<div class="text-center">' + edit_btn + delete_btn + '</div>';
+                }
+            },
         ],
         buttons: [
             {

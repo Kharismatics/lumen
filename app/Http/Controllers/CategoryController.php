@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use DB;
-
+use MyFunctions;
 use App\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -17,7 +19,7 @@ class CategoryController extends Controller
 
      private 
             $validate = [
-                'name' => 'required|name|unique:categories,name,NULL,id,deleted_at,NULL',
+                'name' => 'required',
                 'description' => 'required',
             ],
             $response ;
@@ -35,11 +37,13 @@ class CategoryController extends Controller
     // Resource Controller
     public function index()
     {
-        return Category::all();
+        // return Category::all();
+        return Category::with('products')->get(); 
     }
     public function show(Request $request)
     {
-        return Category::find($request->id);
+        // return MyFunctions::DefaultException(Category::find($request->id));
+        return (Category::find($request->id));
     }
     public function store(Request $request)
     {

@@ -9,7 +9,7 @@ use DB;
 use MyFunctions;
 
 // use App\User;
-// use App\Category;
+use App\Category;
 // use App\Product;
 // use App\Stock;
 // use App\Transaction;

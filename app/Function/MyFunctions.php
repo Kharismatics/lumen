@@ -5,6 +5,10 @@ class MyFunctions
     public static function hello_world()
     {
         return 'Hello World';
+    }
+    public static function DefaultException($data)
+    {
+        print_r($data);
     }   
     public static function Material_colors($data){
         if ($data == 0) return "rgba(3, 169, 244, 0.3)";
