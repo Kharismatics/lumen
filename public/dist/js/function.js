@@ -1,26 +1,3 @@
-function GetAjaxDataSingle(elem, url, param) {
-    $.ajax({
-        dataType: "json",
-        url: url,
-        data: param,
-        type: "post",
-        beforeSend: function () {
-            $(elem).html(
-                '<div class="spinner-border text-danger" role="status"></div>'
-            );
-        },
-        success: function (json) {
-            $(elem).empty();
-            $.each(json, function (index, value) {
-                $(elem).append(value.aggregate);
-            });
-        },
-        error: function (data) {
-            $(elem).html("error");
-        }
-    });
-}
-
 const Toast = Swal.mixin({
     toast: true,
     position: "bottom",
@@ -28,10 +5,7 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
-function GetForm(rowId = null, mode, table) {
-    console.log('rowId');
-    console.log(rowId);
-    
+function GetForm(rowId = null, mode, table) {    
     model = mode;
     $(".invalid-feedback").remove()
     $("input").removeClass('is-invalid')
@@ -60,7 +34,7 @@ function GetForm(rowId = null, mode, table) {
                 // $("#form").empty();
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                  
             },
             error: function (data) { }
@@ -75,8 +49,8 @@ function GetForm(rowId = null, mode, table) {
             var input = $(this);
             data[input.attr('id')] = input.val();
         });
-        console.log('data'+data);
-        console.log(data);
+        // console.log('data'+data);
+        // console.log(data);
 
         if (model == 'add') {
             StoreModel(table, data);
@@ -96,14 +70,22 @@ function StoreModel(table, data) {
         type: "post",
         beforeSend: function () { },
         success: function (data) {
-            $("#myModal").modal("hide");
-            $("#tbl")
-                .DataTable()
-                .ajax.reload();
-            Toast.fire({
-                type: "success",
-                title: "Success, Your Data Has Added"
-            });
+            if (data == 'success') {
+                $("#myModal").modal("hide");
+                $("#tbl")
+                    .DataTable()
+                    .ajax.reload();
+                Toast.fire({
+                    type: "success",
+                    title: "Success, Your Data Has Changed"
+                });
+            }
+            if (data == 'failed') {
+                Toast.fire({
+                    type: "error",
+                    title: " Ups, Something Wrong"
+                });
+            } 
         },
         error: function (data) {
             $(".invalid-feedback").remove()
@@ -139,14 +121,22 @@ function UpdateModel(table, data) {
         type: "post",
         beforeSend: function () { },
         success: function (data) {
-            $("#myModal").modal("hide");
-            $("#tbl")
-                .DataTable()
-                .ajax.reload();
-            Toast.fire({
-                type: "success",
-                title: "Success, Your Data Has Changed"
-            });
+            if (data=='success') {                
+                $("#myModal").modal("hide");
+                $("#tbl")
+                    .DataTable()
+                    .ajax.reload();
+                Toast.fire({
+                    type: "success",
+                    title: "Success, Your Data Has Changed"
+                });
+            }            
+            if (data =='failed') {      
+                Toast.fire({
+                    type: "error",
+                    title: " Ups, Something Wrong"
+                });
+            }            
         },
         error: function (data) {
             $(".invalid-feedback").remove()
@@ -187,13 +177,22 @@ function DeleteModel(rowId = null, table) {
                 type: "post",
                 beforeSend: function () { },
                 success: function (data) {
-                    $("#tbl")
-                        .DataTable()
-                        .ajax.reload();
-                    Toast.fire({
-                        type: "success",
-                        title: "Success, Your Data Has Changed"
-                    });
+                    if (data == 'success') {
+                        $("#myModal").modal("hide");
+                        $("#tbl")
+                            .DataTable()
+                            .ajax.reload();
+                        Toast.fire({
+                            type: "success",
+                            title: "Success, Your Data Has Changed"
+                        });
+                    }
+                    if (data == 'failed') {
+                        Toast.fire({
+                            type: "error",
+                            title: " Ups, Something Wrong"
+                        });
+                    } 
                 },
                 error: function (data) {
                     $("#tbl")
@@ -205,6 +204,29 @@ function DeleteModel(rowId = null, table) {
                     });
                 }
             });
+        }
+    });
+}
+
+function GetAjaxDataSingle(elem, url, param) {
+    $.ajax({
+        dataType: "json",
+        url: url,
+        data: param,
+        type: "post",
+        beforeSend: function () {
+            $(elem).html(
+                '<div class="spinner-border text-danger" role="status"></div>'
+            );
+        },
+        success: function (json) {
+            $(elem).empty();
+            $.each(json, function (index, value) {
+                $(elem).append(value.aggregate);
+            });
+        },
+        error: function (data) {
+            $(elem).html("error");
         }
     });
 }
