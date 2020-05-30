@@ -3,7 +3,6 @@ $(function () {
 
     var tbl = $('#tbl').DataTable({
         dom: "<'row'<'col-sm-5'l><'col-sm-4'B><'col-sm-3 text-align-right'f>>" + '<t>' + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
-        // lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         pageLength: 10,
         processing: true,
         language:
@@ -20,6 +19,13 @@ $(function () {
         },
         columns: [
             { data: "id" },
+            { data: "user.name" },
+            { data: "product.name" },
+            { data: "transaction_date" },
+            { data: "product.price" },
+            { data: "quantity" },
+            { data: "discount" },
+            { data: "shipping_cost" },
         ],
         buttons: [
             {

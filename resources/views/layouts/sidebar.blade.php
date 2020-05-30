@@ -1,7 +1,7 @@
 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 <li class="nav-item">
-  <a href="pages/widgets.html" class="nav-link active">
+  <a href="dashboard" class="nav-link active">
     <i class="nav-icon fas fa-tachometer-alt"></i>
     <p>
       Dashboard
@@ -21,32 +21,32 @@
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="./index.html" class="nav-link">
+      <a href="users" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>People</p>
       </a>
     </li>
     <li class="nav-item">
       <!-- <a href="./index2.html" class="nav-link active"> -->
-      <a href="./index2.html" class="nav-link">
+      <a href="categories" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>Categories</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="./index3.html" class="nav-link">
+      <a href="products" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>Product</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="./index3.html" class="nav-link">
+      <a href="stocks" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>Stock</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="./index3.html" class="nav-link">
+      <a href="transactions" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>Transactions</p>
       </a>

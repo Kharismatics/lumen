@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Transaction;
+use App\User;
+use App\Product;
 
 class TransactionController extends Controller
 {
@@ -38,11 +40,19 @@ class TransactionController extends Controller
     // Resource Controller
     public function index()
     {
-        return Transaction::all();
+        // return Transaction::all();
+        return Transaction::with(['user','product'])->get(); 
     }
     public function show(Request $request)
     {
         return Transaction::find($request->id);
+    }
+    public function edit(Request $request)
+    {
+        $row = Transaction::find($request->id);
+        $users = User::orderBy('name', 'DESC')->get();
+        $products = Product::orderBy('name', 'DESC')->get();
+        return view('transactions.edit', compact('row', 'users', 'products'));
     }
     public function store(Request $request)
     {
@@ -81,7 +91,7 @@ class TransactionController extends Controller
         } 
         return $this->response;
     }
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $data = Transaction::find($request->id);
         if ($data) {

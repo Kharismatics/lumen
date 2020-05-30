@@ -46,6 +46,11 @@ class UserController extends Controller
     {
         return User::find($request->id);
     }
+    public function edit(Request $request)
+    {
+        $row = User::find($request->id);
+        return view('users.edit', compact('row'));
+    }
     public function store(Request $request)
     {
         $this->validate($request, $this->validate);
@@ -78,7 +83,7 @@ class UserController extends Controller
         } 
         return $this->response;
     }
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $data = User::find($request->id);
         if ($data) {

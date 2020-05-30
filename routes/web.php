@@ -47,38 +47,38 @@ $router->post('/category_products', 'DataController@category_products');
 // CRUD =========================================================================
 // User
 $router->post('/users', 'UserController@index');
-$router->post('/user', 'UserController@show');
-$router->post('/users_store', 'UserController@store');
-$router->post('/users_update', 'UserController@update');
-$router->post('/users_delete', 'UserController@delete');
+$router->post('/user', 'UserController@edit');
+$router->post('/user_store', 'UserController@store');
+$router->post('/user_update', 'UserController@update');
+$router->post('/user_delete', 'UserController@destroy');
 // End User
 // Category
 $router->post('/categories', 'CategoryController@index');
-$router->post('/category', 'CategoryController@show');
+$router->post('/category', 'CategoryController@edit');
 $router->post('/category_store', 'CategoryController@store');
 $router->post('/category_update', 'CategoryController@update');
-$router->post('/category_delete', 'CategoryController@delete');
+$router->post('/category_delete', 'CategoryController@destroy');
 // End Category
 // Product
 $router->post('/products', 'ProductController@index');
 $router->post('/product', 'ProductController@edit');
 $router->post('/product_store', 'ProductController@store');
 $router->post('/product_update', 'ProductController@update');
-$router->post('/product_delete', 'ProductController@delete');
+$router->post('/product_delete', 'ProductController@destroy');
 // End Product
 // Stock
 $router->post('/stocks', 'StockController@index');
-$router->post('/stock', 'StockController@show');
+$router->post('/stock', 'StockController@edit');
 $router->post('/stock_store', 'StockController@store');
 $router->post('/stock_update', 'StockController@update');
-$router->post('/stock_delete', 'StockController@delete');
+$router->post('/stock_delete', 'StockController@destroy');
 // End Stock
 // Transaction
 $router->post('/transactions', 'TransactionController@index');
-$router->post('/transaction', 'TransactionController@show');
+$router->post('/transaction', 'TransactionController@edit');
 $router->post('/transaction_store', 'TransactionController@store');
 $router->post('/transaction_update', 'TransactionController@update');
-$router->post('/transaction_delete', 'TransactionController@delete');
+$router->post('/transaction_delete', 'TransactionController@destroy');
 // End Transaction
 // End CRUD =====================================================================
 // php artisan make:controller PhotoController --resource --model=Photo

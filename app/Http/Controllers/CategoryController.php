@@ -45,6 +45,11 @@ class CategoryController extends Controller
         // return MyFunctions::DefaultException(Category::find($request->id));
         return (Category::find($request->id));
     }
+    public function edit(Request $request)
+    {
+        $row = Category::find($request->id);
+        return view('categories.edit', compact('row'));
+    }
     public function store(Request $request)
     {
         $this->validate($request, $this->validate);
@@ -70,7 +75,7 @@ class CategoryController extends Controller
         } 
         return $this->response;
     }
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $data = Category::find($request->id);
         if ($data) {

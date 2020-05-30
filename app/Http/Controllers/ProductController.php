@@ -47,9 +47,9 @@ class ProductController extends Controller
     }
     public function edit(Request $request)
     {
-        $product = Product::find($request->id);
+        $row = Product::find($request->id);
         $categories = Category::orderBy('name', 'DESC')->get();
-        return view('products.edit', compact('product', 'categories'));
+        return view('products.edit', compact('row', 'categories'));
     }
     public function store(Request $request)
     {
@@ -86,7 +86,7 @@ class ProductController extends Controller
         } 
         return $this->response;
     }
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $data = Product::find($request->id);
         if ($data) {

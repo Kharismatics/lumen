@@ -69,7 +69,7 @@ class StockController extends Controller
         } 
         return $this->response;
     }
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $data = Stock::find($request->id);
         if ($data) {

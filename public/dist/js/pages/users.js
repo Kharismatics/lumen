@@ -3,7 +3,6 @@ $(function () {
 
     var tbl = $('#tbl').DataTable({
         dom: "<'row'<'col-sm-5'l><'col-sm-4'B><'col-sm-3 text-align-right'f>>" + '<t>' + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
-        // lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         pageLength: 10,
         processing: true,
         language:
@@ -19,7 +18,18 @@ $(function () {
             }
         },
         columns: [
-            { data: "id" },
+            { data: "name" },
+            { data: "email" },
+            { data: "phone" },
+            { data: "address" },
+            {
+                data: null,
+                render: function (data, type, row, val, meta) {
+                    var edit_btn = '<button type="button" onclick="GetForm(' + row.id + ',\'edit\',\'user\')" class="btn btn-warning btn-flat"><i class="fas fa-edit"></i></button>';
+                    var delete_btn = '<button type="button" onclick="DeleteModel(' + row.id + ',\'user\')" class="btn btn-danger btn-flat"><i class="fas fa-trash"></i></button>';
+                    return '<div class="text-center">' + edit_btn + delete_btn + '</div>';
+                }
+            },
         ],
         buttons: [
             {
